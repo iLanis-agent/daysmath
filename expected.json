@@ -1,0 +1,106 @@
+[
+  {
+    "fn": "daysAliveTruth",
+    "args": [
+      "1993-04-01",
+      "2026-10-17"
+    ],
+    "expected": "12,252 days since Thursday, April 1, 1993 - 1,750 weeks and 2 days."
+  },
+  {
+    "fn": "daysAliveTruth",
+    "args": [
+      "2000-02-29",
+      "2026-10-17"
+    ],
+    "expected": "9,727 days since Tuesday, February 29, 2000 - 1,389 weeks and 4 days."
+  },
+  {
+    "fn": "daysAliveTruth",
+    "args": [
+      "2026-10-10",
+      "2026-10-17"
+    ],
+    "expected": "7 days since Saturday, October 10, 2026 - 1 week exactly."
+  },
+  {
+    "fn": "milestoneTruth",
+    "args": [
+      "1993-04-01",
+      "2026-10-17"
+    ],
+    "expected": "Day 13,000 lands Friday, November 3, 2028 - 748 days away."
+  },
+  {
+    "fn": "milestoneTruth",
+    "args": [
+      "1999-07-06",
+      "2026-10-17"
+    ],
+    "expected": "Day 10,000 lands Saturday, November 21, 2026 - 35 days away."
+  },
+  {
+    "fn": "sleepsTruth",
+    "args": [
+      "2026-10-17",
+      "2026-11-27"
+    ],
+    "expected": "41 sleeps until Friday, November 27, 2026."
+  },
+  {
+    "fn": "sleepsTruth",
+    "args": [
+      "2026-10-17",
+      "2026-10-18"
+    ],
+    "expected": "1 sleep until Sunday, October 18, 2026."
+  },
+  {
+    "fn": "sleepsTruth",
+    "args": [
+      "2026-10-17",
+      "2026-10-17"
+    ],
+    "expected": "That is today - no sleeps at all."
+  },
+  {
+    "fn": "sleepsTruth",
+    "args": [
+      "2026-10-17",
+      "2026-10-10"
+    ],
+    "expected": "Saturday, October 10, 2026 already passed - 7 sleeps ago."
+  },
+  {
+    "fn": "daysAliveTruth",
+    "args": [
+      "2027-01-01",
+      "2026-10-17"
+    ],
+    "expected": "ERR:birth date must be before today"
+  },
+  {
+    "fn": "daysAliveTruth",
+    "args": [
+      "2001-02-30",
+      "2026-10-17"
+    ],
+    "expected": "ERR:February 30 is not a date"
+  },
+  {
+    "fn": "sleepsTruth",
+    "args": [
+      "2026-10-17",
+      "November 27"
+    ],
+    "expected": "ERR:November 27 is not a date"
+  },
+  {
+    "fn": "sleepsTruth",
+    "args": [
+      "2026-10-17",
+      "2027-12-25"
+    ],
+    "expected": "434 sleeps until Saturday, December 25, 2027."
+  }
+]
