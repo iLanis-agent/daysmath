@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Days Math - app</title>
+<style>
+  :root { --accent:#35506b; --ink:#232830; --paper:#f3f5f8; --soft:#e4eaf2; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:Georgia, 'Times New Roman', serif; background:var(--paper); color:var(--ink); line-height:1.55; padding:2rem 1.2rem; }
+  main { max-width:660px; margin:0 auto; }
+  h1 { font-size:1.8rem; color:var(--accent); }
+  .boundary { background:#fdeaea; border-left:6px solid #b03030; color:#5c1c1c; border-radius:6px; padding:1rem 1.1rem; margin:1rem 0 1.4rem; }
+  .boundary strong { display:block; margin-bottom:.3rem; }
+  .panel { background:var(--soft); border-left:5px solid var(--accent); border-radius:6px; padding:1rem 1.1rem; margin-bottom:1.1rem; }
+  h2 { font-size:1.1rem; margin-bottom:.6rem; }
+  p.note { font-size:.9rem; margin-bottom:.4rem; }
+  label { display:block; font-size:.9rem; margin:.45rem 0 .1rem; }
+  input { width:100%; padding:.45rem .55rem; font-size:1rem; border:1px solid #c2cede; border-radius:6px; background:#fff; color:var(--ink); }
+  .out { margin-top:.7rem; font-size:.98rem; background:#fff; border:1px dashed #c2cede; border-radius:6px; padding:.6rem .7rem; min-height:2.4rem; }
+  .out.err { border-color:#b03030; color:#8a1f1f; font-style:normal; }
+  footer { margin-top:1.8rem; font-size:.85rem; color:#5b6673; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Days Math</h1>
+  <div class="boundary">
+    <strong>Boundary: calendar arithmetic only</strong>
+    This page counts days on the calendar, with real leap years. It never tells you what a date means.
+  </div>
+
+  <div class="panel">
+    <h2>The alive truth</h2>
+    <p class="note">The count nobody tracks.</p>
+    <label for="a-birth">Birth date</label>
+    <input id="a-birth" type="date" value="1993-04-01">
+    <div class="out" id="a-out"></div>
+  </div>
+
+  <div class="panel">
+    <h2>The milestone truth</h2>
+    <p class="note">The next round-number day is coming whether or not anyone plans for it.</p>
+    <p class="note">Uses the same birth date as above.</p>
+    <div class="out" id="m-out"></div>
+  </div>
+
+  <div class="panel">
+    <h2>The sleeps truth</h2>
+    <p class="note">Countdowns the way kids keep them.</p>
+    <label for="s-target">The day you're waiting for</label>
+    <input id="s-target" type="date" value="2026-11-27">
+    <div class="out" id="s-out"></div>
+  </div>
+
+  <footer>Days Math is exact calendar arithmetic, leap years and all. <a href="index.html">Why it exists</a>.</footer>
+</main>
+<script src="engine.js"></script>
+<script>
+  const val = (id) => document.getElementById(id).value;
+  function todayStr() {
+    const t = new Date();
+    const p = (n) => String(n).padStart(2, "0");
+    return t.getFullYear() + "-" + p(t.getMonth() + 1) + "-" + p(t.getDate());
+  }
+  function show(out, fn) {
+    try {
+      const text = fn();
+      out.textContent = text;
+      out.classList.remove("err");
+    } catch (e) {
+      out.textContent = e.message;
+      out.classList.add("err");
+    }
+  }
+  const aOut = document.getElementById("a-out");
+  const mOut = document.getElementById("m-out");
+  const sOut = document.getElementById("s-out");
+  function recalc() {
+    const today = todayStr();
+    show(aOut, () => daysAliveTruth(val("a-birth"), today));
+    show(mOut, () => milestoneTruth(val("a-birth"), today));
+    show(sOut, () => sleepsTruth(today, val("s-target")));
+  }
+  document.querySelectorAll("input").forEach((el) => {
+    el.addEventListener("input", recalc);
+    el.addEventListener("change", recalc);
+  });
+  recalc();
+</script>
+</body>
+</html>
